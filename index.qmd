@@ -1,7 +1,41 @@
 ---
-title: "."
+title: "Multiple Sclerosis Age-Sex Specific Incidence Rates"
+execute:
+  echo: false
 ---
 
-This is a Quarto website.
+```{r}
+#| label: setup
+#| message: false
+library(tidyverse)
+```
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+```{r}
+#| label: import data
+ms_data <- read_csv("data/DataFilterExport-2.csv", show_col_types = FALSE)
+```
+
+```{r}
+#| label: create plot
+ms_data |> 
+  drop_na() |>
+  ggplot(aes(x = Age, y = `Incidence Rate`, fill = Sex)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  labs(x = "Age Group", y = "Incidence Rate (per 100,000)", 
+       title = "Age-Sex Specific Incidence Rates in Alberta, 2022",
+       fill = "Sex") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+ms_data |>
+  drop_na() |>
+  ggplot(aes(x = Age, y = `Incidence Rate`)) +
+  geom_bar(stat = "identity", position = "dodge", aes(fill = Sex)) +
+  facet_wrap(~Sex, scales = "free_y") +
+  labs(x = "Age Group", y = "Incidence Rate (per 100,000)", 
+       title = "Age-Sex Specific Incidence Rates in Alberta, 2022",
+       fill = "Sex") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 75, hjust = 1)) 
+```
+
