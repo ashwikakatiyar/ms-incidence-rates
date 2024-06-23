@@ -8,6 +8,8 @@ execute:
 #| label: setup
 #| message: false
 library(tidyverse)
+library(plotly)
+library(wesanderson)
 ```
 
 ```{r}
@@ -17,25 +19,44 @@ ms_data <- read_csv("data/DataFilterExport-2.csv", show_col_types = FALSE)
 
 ```{r}
 #| label: create plot
-ms_data |> 
+ms_bar <- 
+  ms_data |> 
   drop_na() |>
   ggplot(aes(x = Age, y = `Incidence Rate`, fill = Sex)) +
   geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+   scale_fill_manual(values = wes_palette("AsteroidCity1")) +
   labs(x = "Age Group", y = "Incidence Rate (per 100,000)", 
        title = "Age-Sex Specific Incidence Rates in Alberta, 2022",
        fill = "Sex") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
-ms_data |>
+ms_segmented <-
+  ms_data |>
+  filter(Age != "ALL") |>
   drop_na() |>
   ggplot(aes(x = Age, y = `Incidence Rate`)) +
   geom_bar(stat = "identity", position = "dodge", aes(fill = Sex)) +
   facet_wrap(~Sex, scales = "free_y") +
+  scale_fill_manual(values = wes_palette("FantasticFox1")) + 
   labs(x = "Age Group", y = "Incidence Rate (per 100,000)", 
        title = "Age-Sex Specific Incidence Rates in Alberta, 2022",
        fill = "Sex") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 75, hjust = 1)) 
+  theme(axis.title.x = element_text(margin = margin(t = 25)), axis.text.x = element_text(angle = 75, hjust = 1)) 
 ```
+
+```{r}
+#| label: interactive plots
+interactive_bar <- 
+  ggplotly(ms_bar, tooltip = c("Age", "Incidence Rate")) 
+
+interactive_bar
+
+interactive_segmented <- 
+  ggplotly(ms_segmented, tooltip = c("Age", "Incidence Rate")) 
+
+interactive_segmented
+```
+
 
