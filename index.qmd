@@ -53,7 +53,7 @@ interactive_bar
 
 
 
-Multiple Sclerosis is a devastating, demyelinating disease of the central nervous system that affects people of all ages and genders. This data was sourced from the government of Alberta's Interactive Health Data Application. The most recent data, from 2022, was isolated, and the resulting data frame was graphed. The resulting graphical analysis found that Multiple Sclerosis tends to affect women more often than men, and in Alberta, new cases are found most commonly among 35 to 39 year olds.   
+Multiple Sclerosis (MS) is a devastating, demyelinating disease of the central nervous system that affects people of all ages and genders. The MS Incidence Rate is the number of incident (new) cases divided by the population per 100 000 people. This data was sourced from the government of Alberta's Interactive Health Data Application. The most recent data, from 2022, was isolated, and the resulting data frame was graphed. The resulting graphical analysis found that Multiple Sclerosis tends to affect women more often than men, and in Alberta, new cases are found most commonly among 35 to 39 year olds.   
 
 
 
