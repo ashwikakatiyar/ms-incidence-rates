@@ -31,15 +31,22 @@ ms_bar <-
                 position = position_dodge(width = 0.7), 
                 width = 0.25,  
                 alpha = 0.75) +
-   scale_fill_manual(values = wes_palette("AsteroidCity1")) +
+  scale_fill_manual(values = wes_palette("AsteroidCity1")) +
   labs(x = "Age Group", y = "Incidence Rate (per 100 000)", 
-       title = "Age-Sex Specific Incidence Rates in Alberta, 2022",
+       title = "Age-Sex Specific Incidence Rates in Alberta, 2022", 
        fill = "Sex") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  
 
 interactive_bar <- 
-  ggplotly(ms_bar, tooltip = c("Age", "Incidence Rate")) 
+  ggplotly(ms_bar, tooltip = c("Age", "Incidence Rate")) |>
+    layout( annotations = list(
+      text = "Data from Alberta IHDA",
+      x = 1, y = -0.25,  # Adjust these values to position the caption
+      xref = "paper", yref = "paper",
+      showarrow = FALSE,
+      font = list(size = 12)), 
+      margin = list(b = 100))
 
 interactive_bar
 ```
