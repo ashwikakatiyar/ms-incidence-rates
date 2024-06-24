@@ -42,7 +42,7 @@ interactive_bar <-
   ggplotly(ms_bar, tooltip = c("Age", "Incidence Rate")) |>
     layout( annotations = list(
       text = "Data from Alberta IHDA",
-      x = 1, y = -0.25,  # Adjust these values to position the caption
+      x = 1, y = -0.25,
       xref = "paper", yref = "paper",
       showarrow = FALSE,
       font = list(size = 12)), 
