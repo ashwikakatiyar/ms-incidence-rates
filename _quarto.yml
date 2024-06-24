@@ -2,11 +2,12 @@ project:
   type: website
 
 website:
-  title: "Multiple Sclerosis Age-Sex Specific Incidence Rates"
+  title: "Multiple Sclerosis Incidence Rates"
   navbar:
     left:
       - href: index.qmd
         text: Home
+      - sources.qmd
       - about.qmd
 
 format:
