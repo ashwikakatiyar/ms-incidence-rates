@@ -1,0 +1,48 @@
+---
+title: "MS Incidence Rate Over Time"
+execute: 
+  echo: false
+---
+
+```{r}
+#| label: setup
+#| message: false
+library(tidyverse)
+library(plotly)
+library(wesanderson)
+```
+
+```{r}
+#| label: import data
+ms_data <- read_csv("data/DataFilterExport.csv", show_col_types = FALSE)
+ms_data_clean_time <- ms_data |>
+  filter(Age == "ALL")
+```
+
+```{r}
+#| label: line graph
+ms_line <-
+  ms_data_clean_time |>
+  ggplot(aes(x = Year, y = `Incidence Rate`, color = Sex)) +
+  geom_line(linewidth = 1) +
+  scale_color_manual(values = wes_palette("Darjeeling1")) +
+  labs(title = "MS Incidence Rate over Time by Sex", 
+       x = "Year", 
+       y = "Incidence Rate (per 100 000)", 
+       color = "Sex") +
+  theme_minimal()
+
+interactive_line <- 
+  ggplotly(ms_line, tooltip = c("Year", "Incidence Rate")) |>
+    layout( annotations = list(
+      text = "Data from Alberta IHDA",
+      x = 1, y = -0.25,
+      xref = "paper", yref = "paper",
+      showarrow = FALSE,
+      font = list(size = 12)), 
+      margin = list(b = 100))
+
+interactive_line
+```
+
+In general, the incidence rate of MS in Alberta has decreased in the past 18 years, but while the incidence rate for women has significantly decreased, the incidence rate for men has increased in previous years to the point where there is not a significant difference in the rate from 2004 to 2022. Women continue to be more affected by MS than men. 
