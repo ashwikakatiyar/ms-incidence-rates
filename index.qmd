@@ -7,20 +7,35 @@ execute:
 ```{r}
 #| label: setup
 #| message: false
+
 library(tidyverse)
 library(plotly)
 library(wesanderson)
 ```
 
 ```{r}
-#| label: import data
+#| label: import_data
+
+# Brought downloaded CSV file with data into project through terminal. Turned
+# CSV file into data frame. Isolated only data from 2022, the most recent year
+# available.
+
 ms_data <- read_csv("data/DataFilterExport.csv", show_col_types = FALSE) 
 ms_data_clean <- ms_data |>
   filter(Year == "2022") 
 ```
 
 ```{r}
-#| label: create plot
+#| label: create_bar_graph
+
+# Graphed Age vs Incidence Rate for each Sex. Tried to create faceted bar graph
+# using facet_wrap() but decided it would be more valuable to see data for each
+# category next to each other. Added error bars using Standard Error from data
+# set. Used Wes Anderson Palettes R Package for the colors in the bar graph.
+# Opted not to add subtitle since key takeaways were listed in paragraph below.
+# Used minimal theme for clean look. Adjusted the labels on the x-axis so they
+# were easy to read.
+
 ms_bar <- 
   ms_data_clean |> 
   drop_na() |>
@@ -38,9 +53,13 @@ ms_bar <-
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  
 
+
+# Used plotly package to make graph interactive. Added caption to provide source
+# of data, and adjusted sizing and placement of caption. Displayed bar graph.
+
 interactive_bar <- 
   ggplotly(ms_bar, tooltip = c("Age", "Incidence Rate")) |>
-    layout( annotations = list(
+    layout(annotations = list(
       text = "Data from Alberta IHDA",
       x = 1, y = -0.25,
       xref = "paper", yref = "paper",

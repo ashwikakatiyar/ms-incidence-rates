@@ -2,4 +2,8 @@
 title: "Sources"
 ---
 
-This data is from the government of Alberta's Interactive Health Data Application. I downloaded Age-Sex Specific Multiple Sclerosis Incidence Rate Data. Then, I isolated only the data from 2022, the most recent data available, and used it to create my graph.    
+This data is from the government of Alberta's Interactive Health Data
+Application. I downloaded Age-Sex Specific Multiple Sclerosis Incidence Rate
+Data. I also used the [Wes Anderson
+Palettes](https://github.com/karthik/wesanderson) R package created by [Karthik
+Ram](https://github.com/karthik) from Github for the colors in my graphs.

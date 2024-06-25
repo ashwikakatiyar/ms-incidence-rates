@@ -13,24 +13,40 @@ library(wesanderson)
 ```
 
 ```{r}
-#| label: import data
+#| label: import_data
+
+# Brought downloaded CSV file with data into project through terminal. Turned
+# CSV file into data frame. Kept only the data that combined all age groups
+# together to see the general trend in incidence rates over time.
+
 ms_data <- read_csv("data/DataFilterExport.csv", show_col_types = FALSE)
 ms_data_clean_time <- ms_data |>
   filter(Age == "ALL")
 ```
 
 ```{r}
-#| label: line graph
+#| label: create_line_graph
+
+# Created line graph to show trend of MS Incidence Rates in Alberta over time.
+# Tried bar graph but decided on line graph so trend was more apparent. Created
+# lines for each of the Sex categories to see the effect of Sex on incidence
+# rate change over time. Used Wes Anderson Palettes R package for colors in line
+# graph. Opted not to add subtitle since key takeaways were listed in paragraph
+# below. Used minimal theme for clean look.
+
 ms_line <-
   ms_data_clean_time |>
   ggplot(aes(x = Year, y = `Incidence Rate`, color = Sex)) +
-  geom_line(linewidth = 1) +
-  scale_color_manual(values = wes_palette("Darjeeling1")) +
+  geom_line(linewidth = 0.5) +
+  scale_color_manual(values = wes_palette("FantasticFox1")[3:5]) +
   labs(title = "MS Incidence Rate over Time by Sex", 
        x = "Year", 
        y = "Incidence Rate (per 100 000)", 
        color = "Sex") +
   theme_minimal()
+
+# Used plotly package to make graph interactive. Added caption to provide source
+# of data, and adjusted sizing and placement of caption. Displayed line graph.
 
 interactive_line <- 
   ggplotly(ms_line, tooltip = c("Year", "Incidence Rate")) |>
@@ -45,4 +61,4 @@ interactive_line <-
 interactive_line
 ```
 
-In general, the incidence rate of MS in Alberta has decreased in the past 18 years, but while the incidence rate for women has significantly decreased, the incidence rate for men has increased in previous years to the point where there is not a significant difference in the rate from 2004 to 2022. Women continue to be more affected by MS than men. 
+In general, the incidence rate of MS in Alberta has decreased in the past 18 years, but while the incidence rate for women has had a relatively significant decrease, the incidence rate for men has increased in previous years to the point where there is not a significant difference in the rate from 2004 to 2022. Women continue to be more affected by MS than men. 
