@@ -6,6 +6,6 @@
 *Rproj
 _site/
 data/
-index_files/
+_publish.yml
 
 /.quarto/
