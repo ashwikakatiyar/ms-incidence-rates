@@ -37,8 +37,8 @@ ms_data_clean_time <- ms_data |>
 ms_line <-
   ms_data_clean_time |>
   ggplot(aes(x = Year, y = `Incidence Rate`, color = Sex)) +
-  geom_line(linewidth = 0.5) +
-  scale_color_manual(values = wes_palette("FantasticFox1")[3:5]) +
+  geom_line(linewidth = 0.75) +
+  scale_color_manual(values = wes_palette("Cavalcanti1")[c(4, 1, 5)]) +
   labs(title = "MS Incidence Rate over Time by Sex", 
        x = "Year", 
        y = "Incidence Rate (per 100 000)", 
