@@ -19,7 +19,7 @@ library(wesanderson)
 # CSV file into data frame. Kept only the data that combined all age groups
 # together to see the general trend in incidence rates over time.
 
-ms_data <- read_csv("data/DataFilterExport.csv", show_col_types = FALSE)
+ms_data <- read_csv("DataFilterExport.csv", show_col_types = FALSE)
 ms_data_clean_time <- ms_data |>
   filter(Age == "ALL")
 ```

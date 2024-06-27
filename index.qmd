@@ -20,7 +20,7 @@ library(wesanderson)
 # CSV file into data frame. Isolated only data from 2022, the most recent year
 # available.
 
-ms_data <- read_csv("data/DataFilterExport.csv", show_col_types = FALSE) 
+ms_data <- read_csv("DataFilterExport.csv", show_col_types = FALSE) 
 ms_data_clean <- ms_data |>
   filter(Year == "2022") 
 ```
