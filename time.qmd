@@ -1,5 +1,5 @@
 ---
-title: "MS Incidence Rate Over Time"
+title: "MS Incidence Rate Over Time By Sex"
 execute: 
   echo: false
 ---
@@ -31,16 +31,16 @@ ms_data_clean_time <- ms_data |>
 # Tried bar graph but decided on line graph so trend was more apparent. Created
 # lines for each of the Sex categories to see the effect of Sex on incidence
 # rate change over time. Used Wes Anderson Palettes R package for colors in line
-# graph. Opted not to add subtitle since key takeaways were listed in paragraph
-# below. Used minimal theme for clean look.
+# graph. Opted not to add title since it was the same as the page and subtitle
+# since key takeaways were listed in paragraph below. Used minimal theme for
+# clean look.
 
 ms_line <-
   ms_data_clean_time |>
   ggplot(aes(x = Year, y = `Incidence Rate`, color = Sex)) +
   geom_line(linewidth = 0.75) +
   scale_color_manual(values = wes_palette("Cavalcanti1")[c(4, 1, 5)]) +
-  labs(title = "MS Incidence Rate over Time by Sex", 
-       x = "Year", 
+  labs(x = "Year", 
        y = "Incidence Rate (per 100 000)", 
        color = "Sex") +
   theme_minimal()

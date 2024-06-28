@@ -1,0 +1,69 @@
+---
+title: "Age-Sex Specific Incidence Rates, 2004-2022"
+execute: 
+  echo: false
+---
+
+```{r}
+#| label: setup
+#| message: false
+
+library(tidyverse)
+library(plotly)
+library(wesanderson)
+```
+
+```{r}
+#| label: import_data
+
+# Brought downloaded CSV file with data into project through terminal. Turned
+# CSV file into data frame. 
+
+ms_data <- read_csv("DataFilterExport.csv", show_col_types = FALSE) 
+```
+
+```{r}
+#| label: create_bar_graph
+
+# Graphed Age vs Incidence Rate for each Sex for all years. Tried to create
+# faceted bar graph using facet_wrap() but decided it would be more valuable to
+# see data for each category next to each other. Used Wes Anderson Palettes R
+# Package for the colors in the bar graph. Opted not to add title since it was
+# the same as the page and subtitle since key takeaways were listed in paragraph
+# below. Used minimal theme for clean look. Adjusted the labels on the x-axis so
+# they were easy to read.
+
+ms_bar_all <- 
+  ms_data |>
+  drop_na() |>
+  ggplot(aes(x = Age, y = `Incidence Rate`, fill = Sex)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  scale_fill_manual(values = wes_palette("Darjeeling1")[c(2, 3, 1)]) +
+  labs(x = "Age Group", y = "Incidence Rate (per 100 000)", 
+       fill = "Sex") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  
+
+
+# Used plotly package to make graph interactive. Added caption to provide source
+# of data, and adjusted sizing and placement of caption. Displayed bar graph.
+
+interactive_bar_all <- 
+  ggplotly(ms_bar_all, tooltip = c("Age", "Incidence Rate")) |>
+    layout(annotations = list(
+      text = "Data from Alberta IHDA",
+      x = 1, y = -0.25,
+      xref = "paper", yref = "paper",
+      showarrow = FALSE,
+      font = list(size = 12)), 
+      margin = list(b = 100))
+
+interactive_bar_all
+```
+
+
+The trends in across all the years of data available seems to follow many of the
+same trends as the data in 2022, such as female incidence rates generally being
+higher than male incidence rates. In general, people tend to get diagnosed with
+MS as adults, most commonly in their early to middle adulthood, indicating that
+that age range is around when MS typically develops in adults.
