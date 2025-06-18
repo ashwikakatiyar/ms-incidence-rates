@@ -1,2 +1,2 @@
-# ms-incidence-rates
+# MS Incidence Rates
 Multiple Sclerosis (MS) is a devastating, demyelinating disease of the central nervous system that affects people of all ages and genders. MS Incidence Rate data, which is the number of incident (new) cases divided by the total population at risk per 100 000 people, was sourced from the government of Alberta’s Interactive Health Data Application. The most recent data, from 2022, was isolated and graphed. The resulting graphical analysis found that Multiple Sclerosis tends to affect women more often than men, indicating that sex might be a risk factor for developing MS. The associated website for this project can be found here: https://ashwikakatiyar.quarto.pub/ms-incidence-rates/
